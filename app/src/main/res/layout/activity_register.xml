@@ -15,7 +15,7 @@
         android:background="#FFFFFF"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:text="@string/username_register"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="100dp"
         tools:ignore="MissingConstraints" />
@@ -28,7 +28,7 @@
         android:background="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password"
+        android:text="@string/password_register"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/email_registerActivity_txt"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +43,7 @@
         android:background="#FFFFFF"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email"
+        android:text="@string/email_register"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/username_registerActivity_txt"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="@+id/password_registerActivity_txt"
         app:layout_constraintStart_toStartOf="@+id/password_registerActivity_txt"
         app:layout_constraintTop_toBottomOf="@+id/password_registerActivity_txt" />
@@ -70,13 +70,14 @@
         app:layout_constraintEnd_toEndOf="@+id/username_registerActivity_txt"
         app:layout_constraintStart_toStartOf="@+id/username_registerActivity_txt"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/already_have_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account"
+        android:text="@string/already_have_an_account"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/button_registerActivity_btt"

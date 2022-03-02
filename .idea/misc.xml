@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ChatApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/ChatApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/ChatApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ChatApp/app/src/main/res/layout/activity_register.xml" value="0.33" />
       </map>
@@ -14,5 +14,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -5,7 +5,7 @@
     <string name="password_login">Password</string>
     <string name="email_login">Email</string>
     <string name="register">Register</string>
-    <string name="already_have_an_account">Already have an account</string>
+    <string name="already_have_an_account">Already have an account?</string>
     <string name="email_register">Email</string>
     <string name="username_register">Username</string>
     <string name="password_register">Password</string>

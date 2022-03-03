@@ -19,38 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(applicationContext)
 
         button_registerActivity_btt.setOnClickListener {
-            val email = email_registerActivity_txt.text.toString()
-            val password = password_registerActivity_txt.text.toString()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please provide a e-mail and password", Toast.LENGTH_SHORT).show()
-
-                return@setOnClickListener
-            }
-
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener  {
-                    if (it.isSuccessful) {
-                        Log.d("Register", "Succesfully created user with uid: ${it.result.user!!.uid}")
-                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, LoginActivity::class.java))
-                    } else {
-                        return@addOnCompleteListener
-                    }
-                }
-                .addOnFailureListener {
-                    Log.d("Register", "Failed to create user: ${it.message}")
-
-                    if (it.message == "The email address is badly formatted.") {
-                        Toast.makeText(this, "Please provide a valid e-mail", Toast.LENGTH_SHORT).show()
-                    }
-                    else if (it.message == "The given password is invalid. [ Password should be at least 6 characters ]") {
-                        Toast.makeText(this, "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
-                        Toast.makeText(this, "Please provide a valid e-mail or password", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            userRegister()
         }
 
         already_have_account.setOnClickListener {
@@ -59,5 +28,46 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun userRegister() {
+        val email = email_registerActivity_txt.text.toString()
+        val password = password_registerActivity_txt.text.toString()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please provide a e-mail and password", Toast.LENGTH_SHORT).show()
+
+            return
+        }
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Log.d("Register", "Successfully created user with uid: ${it.result.user!!.uid}")
+                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LoginActivity::class.java))
+                } else {
+                    return@addOnCompleteListener
+                }
+            }
+            .addOnFailureListener {
+                Log.d("Register", "Failed to create user: ${it.message}")
+
+                if (it.message == "The email address is badly formatted.") {
+                    Toast.makeText(this, "Please provide a valid e-mail", Toast.LENGTH_SHORT).show()
+                } else if (it.message == "The given password is invalid. [ Password should be at least 6 characters ]") {
+                    Toast.makeText(
+                        this,
+                        "Password should be at least 6 characters",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Please provide a valid e-mail or password",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 }

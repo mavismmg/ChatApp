@@ -53,20 +53,24 @@ class RegisterActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d("Register", "Failed to create user: ${it.message}")
 
-                if (it.message == "The email address is badly formatted.") {
-                    Toast.makeText(this, "Please provide a valid e-mail", Toast.LENGTH_SHORT).show()
-                } else if (it.message == "The given password is invalid. [ Password should be at least 6 characters ]") {
-                    Toast.makeText(
-                        this,
-                        "Password should be at least 6 characters",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Please provide a valid e-mail or password",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                when (it.message) {
+                    "The email address is badly formatted." -> {
+                        Toast.makeText(this, "Please provide a valid e-mail", Toast.LENGTH_SHORT).show()
+                    }
+                    "The given password is invalid. [ Password should be at least 6 characters ]" -> {
+                        Toast.makeText(
+                            this,
+                            "Password should be at least 6 characters",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    else -> {
+                        Toast.makeText(
+                            this,
+                            "Please provide a valid e-mail or password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
     }

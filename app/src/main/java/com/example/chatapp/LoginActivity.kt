@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
-class LoginActivity: AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -19,36 +19,48 @@ class LoginActivity: AppCompatActivity() {
         FirebaseApp.initializeApp(applicationContext)
 
         button_loginActivity_btt.setOnClickListener {
-            val email = username_loginActivity_txt.text.toString()
-            //val email = email_loginActivity_txt.text.toString()
-            val password = password_loginActivity_txt.text.toString()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please provide a e-mail and password", Toast.LENGTH_SHORT).show()
-
-                return@setOnClickListener
-            }
-
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) {
-                    if (it.isSuccessful) {
-                        Log.d("Login", "Successfully logged in: ${it.result.user!!.uid}")
-                    } else {
-                        Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT).show()
-
-                        return@addOnCompleteListener
-                    }
-                }
-                .addOnFailureListener {
-                    Log.d("Login", "Failed to log in: ${it.message}")
-                }
+            userLogin()
         }
 
         dont_have_account_login.setOnClickListener {
-            Log.d("LoginActivity", "User already have an acount")
-
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            userHaveAnAccount()
         }
+    }
+
+    private fun userLogin() {
+        val email = username_loginActivity_txt.text.toString()
+        //val email = email_loginActivity_txt.text.toString()
+        val password = password_loginActivity_txt.text.toString()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please provide a e-mail and password", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+                    Log.d("Login", "Successfully logged in: ${it.result.user!!.uid}")
+                } else {
+
+
+                    return@addOnCompleteListener
+                }
+            }
+            .addOnFailureListener {
+                Log.d("Login", "Failed to log in: ${it.message}")
+
+                if (it.message == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+                    Toast.makeText(this, "E-mail or password is wrong", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    Toast.makeText(this, "Invalid e-mail", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun userHaveAnAccount() {
+        Log.d("LoginActivity", "User already have an acount")
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

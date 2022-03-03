@@ -1,15 +1,15 @@
 package com.example.chatapp
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun userLogin() {
+    private fun userLogin() : Unit {
         val email = username_loginActivity_txt.text.toString()
         //val email = email_loginActivity_txt.text.toString()
         val password = password_loginActivity_txt.text.toString()
@@ -59,8 +59,8 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun userHaveAnAccount() {
-        Log.d("LoginActivity", "User already have an acount")
+    private fun userHaveAnAccount() : Unit {
+        Log.d("LoginActivity", "User already have an account")
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

@@ -1,14 +1,15 @@
 package com.example.chatapp
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -17,6 +18,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         FirebaseApp.initializeApp(applicationContext)
+
+        emailMatchesVerification()
 
         button_registerActivity_btt.setOnClickListener {
             userRegister()
@@ -30,7 +33,30 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun userRegister() {
+    private fun emailMatchesVerification() : Unit {
+        email_registerActivity_txt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(matchEmailVerification: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Logic here
+            }
+
+            override fun onTextChanged(matchEmailVerification: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Logic here
+            }
+
+            override fun afterTextChanged(matchEmailVerification: Editable?) {
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher((email_registerActivity_txt.text.toString())).matches()) {
+                    Log.d("Login", "E-mail matches")
+                }
+                else {
+                    Log.d("Login", "Input e-mail invalid")
+                    email_registerActivity_txt.error = "Invalid e-mail"
+                }
+            }
+
+        })
+    }
+
+    private fun userRegister() : Unit {
         val email = email_registerActivity_txt.text.toString()
         val password = password_registerActivity_txt.text.toString()
 
